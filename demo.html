@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="jquery.evtpaginate.js"></script>
+	
+	<style>
+		* { padding: 0; margin: 0; }
+		body { padding: 10px 0 30px 0 }
+		#page { width: 900px; margin: 0 auto }
+		li { list-style: none }
+		h1, h2 { margin: 15px 0}
+	 	.wrapper { border: 1px solid #CCC; }
+	</style> 
+	
+	<title>JQuery Event-Driven Pagination Demo</title>
+
+</head>
+<body>
+	
+	<div id="page">
+		
+		<h1>JQuery Event-Driven Pagination Demo</h1>
+
+		<p>View the source of this page to see how these examples are implemented, but please note that these are very basic examples and haven't been put together with non-JS fallbacks or other considerations in mind :-)</p>
+
+		<div class="example">
+
+			<h2>Basic example</h2>
+
+			<script> 
+				$(function(){
+
+					var wrap = $('#wrapper');
+
+					// set up click events to trigger the pagination plugins' behaviour 
+
+					$('.prev').click(function(){
+						wrap.trigger('prev.evtpaginate');
+						return false;
+					});
+
+					$('.next').click(function(){
+						wrap.trigger('next.evtpaginate');
+						return false;
+					});
+
+					// listen out for events triggered by the plugin to update the counter
+
+					wrap.bind( 'initialized.evtpaginate', function(e, startnum, totalnum ){
+						$('#count').text(startnum);
+						$('#total').text(totalnum);
+					}); 
+
+					wrap.bind( 'finished.evtpaginate', function(e, num, isFirst, isLast ){ $('#count').text(num); } ); 	
+
+					wrap.evtpaginate({perPage:2}); // call the plugin!	
+
+				});
+			</script>
+
+			<p>
+				<a class="prev" href="#">prev</a>
+				(<span id="count"></span> / <span id="total"></span>)
+				<a class="next" href="#">next</a>
+			</p> 
+
+			<ul id="wrapper" class="wrapper"> 
+				<li>one</li> 
+				<li>two</li> 
+				<li>three</li> 
+				<li>four</li> 
+				<li>five</li> 
+				<li>six</li> 
+				<li>seven</li> 
+				<li>eight</li> 
+				<li>nine</li> 
+				<li>ten</li> 
+			</ul>	
+
+		</div>
+
+
+
+		<div class="example">
+
+			<h2>Looping & more features</h2>
+
+			<script> 
+				$(function(){
+
+					var wrap2 = $('#wrapper2');
+
+					$('.action').click(function(){
+						var action = $(this).attr('rel'); // get the appropriate action from the rel attribute
+						wrap2.trigger(action+'.evtpaginate');
+						return false;
+					});
+
+					$('select[name=perpage]').change(function(){
+						wrap2.trigger('refresh.evtpaginate', { perPage : $(this).val() } );
+						return false;
+					});
+
+					// listen out for events triggered by the plugin to update the counter
+
+					wrap2.bind( 'initialized.evtpaginate', function(e, startnum, totalnum ){
+						$('#count2').text(startnum);
+						$('#total2').text(totalnum);
+					}); 
+
+					wrap2.bind( 'finished.evtpaginate', function(e, num, isFirst, isLast ){ $('#count2').text(num); } ); 	
+
+					wrap2.evtpaginate({perPage:4, atEnd:'loop'}); // call the plugin!	
+
+				});
+			</script>
+
+			<p>
+				<a class="action" href="#" rel="first">first</a> | 
+				<a class="action" href="#" rel="prev">prev</a>
+
+				(<span id="count2"></span> / <span id="total2"></span>)
+				<a class="action" href="#" rel="next">next</a> | 
+				<a class="action" href="#" rel="last">last</a> | show :
+				 <select name="perpage">
+				 	<option value="1">1 per page</option>
+					<option value="2">2 per page</option>
+
+					<option value="5">5 per page</option>
+				 </select>
+			</p>	
+
+			<ul id="wrapper2" class="wrapper"> 
+				<li>one</li> 
+				<li>two</li> 
+				<li>three</li> 
+				<li>four</li> 
+				<li>five</li> 
+				<li>six</li> 
+				<li>seven</li> 
+				<li>eight</li> 
+				<li>nine</li> 
+				<li>ten</li> 
+				<li>eleven</li>
+
+				<li>twelve</li>
+				<li>thirteen</li>
+				<li>fourteen</li>
+				<li>fifteen</li>
+			</ul>
+
+		</div>
+
+		<div class="example">
+
+
+			<h2>Quick image example</h2>
+
+			<script> 
+				$(function(){
+
+					var imgs = $('#images');
+
+					$('.action2').click(function(){
+						var action = $(this).attr('rel'); // get the appropriate action from the rel attribute
+						imgs.trigger(action+'.evtpaginate');
+						return false;
+					});
+
+					imgs.evtpaginate({perPage:1, atEnd:'stop'}); // call the plugin!	
+
+				});
+			</script>
+
+			<div id="images"> 
+				<img src="http://placehold.it/200x130&text=Image+1" width="200" height="130" alt="Demo1"> 
+				<img src="http://placehold.it/200x130&text=Image+2" width="200" height="130" alt="Demo2"> 
+				<img src="http://placehold.it/200x130&text=Image+3" width="200" height="130" alt="Demo3"> 
+			</div>
+
+			<p>
+				<a class="action2" href="#" rel="first">first</a>  &nbsp;&nbsp;&nbsp; 
+				<a class="action2" href="#" rel="prev">prev</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+				<a class="action2" href="#" rel="next">next</a>  &nbsp;&nbsp;&nbsp;
+				<a class="action2" href="#" rel="last">last</a>  &nbsp;&nbsp;&nbsp;
+			</p>
+
+		</div>
+		
+		
+	</div>
+	
+</body>	
+</html>
+
