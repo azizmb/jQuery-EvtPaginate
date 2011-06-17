@@ -7,12 +7,15 @@
 	<script src="jquery.evtpaginate.js"></script>
 	
 	<style>
-		* { padding: 0; margin: 0; }
-		body { padding: 10px 0 30px 0 }
-		#page { width: 900px; margin: 0 auto }
-		li { list-style: none }
-		h1, h2 { margin: 15px 0}
-	 	.wrapper { border: 1px solid #CCC; }
+		*{margin:0;padding:0}
+		body{padding:10px 0 30px}
+		#page{width:900px;margin:0 auto}
+		li{list-style:none}
+		h1,h2{margin:15px 0}
+		.wrapper{border:1px solid #CCC}
+		.page_navigation,.alt_page_navigation{padding-bottom:10px}
+		.page_navigation a,.alt_page_navigation a{color:#FFF;text-decoration:none;float:left;font-family:Tahoma;font-size:12px;background-color:#DB5C04;margin:2px;padding:3px 5px}
+		.active_page{background-color:#FFF!important;color:#000!important}
 	</style> 
 	
 	<title>JQuery Event-Driven Pagination Demo</title>
@@ -113,7 +116,7 @@
 
 					wrap2.bind( 'finished.evtpaginate', function(e, num, isFirst, isLast ){ $('#count2').text(num); } ); 	
 
-					wrap2.evtpaginate({perPage:4, atEnd:'loop'}); // call the plugin!	
+					wrap2.evtpaginate({perPage:4, show_page_nos: true }); // call the plugin!	
 
 				});
 			</script>
@@ -145,13 +148,43 @@
 				<li>nine</li> 
 				<li>ten</li> 
 				<li>eleven</li>
-
 				<li>twelve</li>
 				<li>thirteen</li>
 				<li>fourteen</li>
 				<li>fifteen</li>
 			</ul>
 
+		</div>
+		
+		<div class="example">
+
+			<h2>Auto generated navigation</h2>
+
+			<script> 
+				$(function(){
+					$("#wrapper3").evtpaginate({perPage:4, show_navigation: true }); // call the plugin!	
+				});
+			</script>
+
+			<ul id="wrapper3" class="wrapper"> 
+				<li>one</li> 
+				<li>two</li> 
+				<li>three</li> 
+				<li>four</li> 
+				<li>five</li> 
+				<li>six</li> 
+				<li>seven</li> 
+				<li>eight</li> 
+				<li>nine</li> 
+				<li>ten</li> 
+				<li>eleven</li>
+				<li>twelve</li>
+				<li>thirteen</li>
+				<li>fourteen</li>
+				<li>fifteen</li>
+			</ul>
+			<div class="page_navigation"></div>
+			
 		</div>
 
 		<div class="example">
