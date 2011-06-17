@@ -4,9 +4,6 @@ jQuery Event-driven pagination plugin
 A stripped-back jQuery plugin that makes it possible to paginate pretty much any group of objects on a page, using custom events as the interaction API.
 
 It **does** make the element it was called on respond to a set of custom DOM events that can be used to control the pagination, display page counts, refresh the list contents and so on.
-It **does not** (out-of-the-box) provide a set of controls to do the pagination, or display the page count or suchlike.
-
-Why does is work like this? Simple answer: flexibility. Plugins where you have to pass in a set of IDs or jQuery objects for controlling things like previous and next functionality are inherently limiting. Once applied to a set of elements, this plugin instead lets you decide what elements or interactions will trigger it's behaviour, and what elements (if any) display information on the page count and current page, etc. You can make it work on hover, on click, on double click, whatever you want.
 
 License
 -------
